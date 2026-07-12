@@ -1,36 +1,87 @@
-class datos_envio:
-    def __init__(self, empresa, ruc, numero_guia, ciudad, transportista):
+# Clase
+
+class DatosEnvio:
+
+    def __init__(self, numero_guia, empresa, ruc, ciudad, transportista):
+        self.numero_guia = numero_guia
         self.empresa = empresa
         self.ruc = ruc
-        self.numero_guia = numero_guia
         self.ciudad = ciudad
         self.transportista = transportista
 
+
+# Lista donde se almacenarán las guías
+
 lista_datos_envio = []
 
-def main():
-  numero_guia = 00
 
-  while numero_guia < 20:
-    #DATOS DE ENTRADA
+# Programa principal
 
-    numero_guia = int(input("Ingrese el numero de guia: "))
-    
-    #SECUENCIA DE PASOS
+while True:
 
-    if numero_guia > 00 and numero_guia < 20:
-      empresa =  input("Ingrese la empresa: ")
-      ruc = input("Ingrese el RUC: ")
-      ciudad = input("Ingrese la ciudad: ")
-      transportista = input("Ingrese el transportista: ")
+    print("\n========== MENÚ ==========")
+    print("1. Registrar guía")
+    print("2. Mostrar guías")
+    print("3. Salir")
 
-    data = datos_envio(empresa, ruc, numero_guia, ciudad, transportista)
-    lista_datos_envio.append(data)
+    opcion = input("Seleccione una opción: ")
 
-# input
+    # Registrar guía
 
-numero_guia = int(input("Ingrese el numero de guia: "))
+    if opcion == "1":
 
-#output
-for datos in lista_datos_envio:
-    print(f"En la guia {datos.numero_guia}, la empresa {datos.empresa} con RUC {datos.ruc}, envio a la ciudad de {datos.ciudad} con el transportista {datos.transportista}")
+        if len(lista_datos_envio) >= 20:
+            print("\nYa se alcanzó el límite de 20 guías.")
+            continue
+
+        numero_guia = int(input("Ingrese el número de guía: "))
+        empresa = input("Ingrese la razón social de la empresa: ")
+        ruc = input("Ingrese el RUC: ")
+        ciudad = input("Ingrese la ciudad de destino: ")
+        transportista = input("Ingrese el transportista: ")
+
+        guia = DatosEnvio(
+            numero_guia,
+            empresa,
+            ruc,
+            ciudad,
+            transportista
+        )
+
+        lista_datos_envio.append(guia)
+
+        print("\nGuía registrada correctamente.")
+
+    # Mostrar guías
+
+    elif opcion == "2":
+
+        if len(lista_datos_envio) == 0:
+
+            print("\nNo existen guías registradas.")
+
+        else:
+
+            print("\n===== GUÍAS REGISTRADAS =====")
+
+            for guia in lista_datos_envio:
+
+                print("--------------------------------")
+                print("Número de guía :", guia.numero_guia)
+                print("Empresa        :", guia.empresa)
+                print("RUC            :", guia.ruc)
+                print("Ciudad         :", guia.ciudad)
+                print("Transportista  :", guia.transportista)
+
+    # Salir
+
+    elif opcion == "3":
+
+        print("\nGracias por usar el sistema.")
+        break
+
+    # Opción inválida
+
+    else:
+
+        print("\nOpción inválida.")
