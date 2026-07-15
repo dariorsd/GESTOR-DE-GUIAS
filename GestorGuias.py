@@ -2,7 +2,9 @@
 
 class DatosEnvio:
 
-    def __init__(self, numero_guia, empresa, ruc, ciudad, transportista):
+    def __init__( self, usuario, numero_guia, empresa, ruc, ciudad, transportista):
+
+        self.usuario = usuario
         self.numero_guia = numero_guia
         self.empresa = empresa
         self.ruc = ruc
@@ -14,8 +16,53 @@ class DatosEnvio:
 
 lista_datos_envio = []
 
+# usuarios y contraseñas
+
+usuario1 = "Dario"
+clave1 = "2026"
+usuario2 = "Hernan"
+clave2 = "2026"
+usuario3 = "Martina"
+clave3 = "2026"
+usuario4 = "James"
+clave4 = "2026"
 
 # Programa principal
+
+intentos = 0
+
+while intentos < 3:
+
+    usuario = input("Usuario: ")
+    clave = input("Contraseña: ")
+
+    if usuario == usuario1 and clave == clave1:
+        usuario_actual = usuario
+        print("Bienvenido", usuario_actual)
+        break
+
+    elif usuario == usuario2 and clave == clave2:
+        usuario_actual = usuario
+        print("Bienvenido", usuario_actual)
+        break
+
+    elif usuario == usuario3 and clave == clave3:
+        usuario_actual = usuario
+        print("Bienvenido", usuario_actual)
+        break
+
+    elif usuario == usuario4 and clave == clave4:
+        usuario_actual = usuario
+        print("Bienvenido", usuario_actual)
+        break
+
+    else:
+        print("Usuario o contraseña incorrectos.")
+        intentos += 1
+
+if intentos == 3:
+    print("Sistema bloqueado")
+    exit()
 
 while True:
 
@@ -41,6 +88,7 @@ while True:
         transportista = input("Ingrese el transportista: ")
 
         guia = DatosEnvio(
+            usuario_actual,
             numero_guia,
             empresa,
             ruc,
@@ -67,6 +115,7 @@ while True:
             for guia in lista_datos_envio:
 
                 print("--------------------------------")
+                print("Usuario        :", guia.usuario)
                 print("Número de guía :", guia.numero_guia)
                 print("Empresa        :", guia.empresa)
                 print("RUC            :", guia.ruc)
