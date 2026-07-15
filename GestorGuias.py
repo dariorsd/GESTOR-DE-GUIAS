@@ -2,15 +2,15 @@
 
 class DatosEnvio:
 
-    def __init__( self, usuario, numero_guia, empresa, ruc, ciudad, transportista):
+    def __init__( self, usuario, numero_guia, empresa, ruc, distrito, transportista, estado):
 
         self.usuario = usuario
         self.numero_guia = numero_guia
         self.empresa = empresa
         self.ruc = ruc
-        self.ciudad = ciudad
+        self.distrito = distrito
         self.transportista = transportista
-
+        self.estado = estado
 
 # Lista donde se almacenarán las guías
 
@@ -68,8 +68,9 @@ while True:
 
     print("\n========== MENÚ ==========")
     print("1. Registrar guía")
-    print("2. Mostrar guías")
-    print("3. Salir")
+    print("2. Cambiar estado")
+    print("3. Mostrar guías")
+    print("4. Salir")
 
     opcion = input("Seleccione una opción: ")
 
@@ -84,7 +85,7 @@ while True:
         numero_guia = int(input("Ingrese el número de guía: "))
         empresa = input("Ingrese la razón social de la empresa: ")
         ruc = input("Ingrese el RUC: ")
-        ciudad = input("Ingrese la ciudad de destino: ")
+        distrito = input("Ingrese el distrito de destino: ")
         transportista = input("Ingrese el transportista: ")
 
         guia = DatosEnvio(
@@ -92,17 +93,54 @@ while True:
             numero_guia,
             empresa,
             ruc,
-            ciudad,
-            transportista
+            distrito,
+            transportista,
+            "Sin procesar"
         )
 
         lista_datos_envio.append(guia)
 
         print("\nGuía registrada correctamente.")
 
-    # Mostrar guías
+    # Cambiar estado
 
     elif opcion == "2":
+        print("\n===== GUÍAS DISPONIBLES =====")
+
+        for guia in lista_datos_envio:
+            print(f"Guía N° {guia.numero_guia} - Estado: {guia.estado}")
+            numero = int(input("\nSeleccione el número de guía: "))
+
+            print("\n===== CAMBIAR ESTADO =====")
+
+        print("1. En almacén")
+        print("2. En camino")
+        print("3. Entregada")
+        print("4. Cancelar")
+
+        opcion_estado = input("Seleccione una opción: ")
+
+        if opcion_estado == "1":
+            guia.estado = "En almacén"
+
+        elif opcion_estado == "2":
+            guia.estado = "En camino"
+
+        elif opcion_estado == "3":
+            guia.estado = "Entregada"
+
+        elif opcion_estado == "4":
+            print("Volviendo al menú principal.")
+        
+
+        else:
+             print("Opción inválida.")
+
+        
+
+    # Mostrar guías
+
+    elif opcion == "3":
 
         if len(lista_datos_envio) == 0:
 
@@ -119,12 +157,13 @@ while True:
                 print("Número de guía :", guia.numero_guia)
                 print("Empresa        :", guia.empresa)
                 print("RUC            :", guia.ruc)
-                print("Ciudad         :", guia.ciudad)
+                print("Distrito       :", guia.distrito)
                 print("Transportista  :", guia.transportista)
+                print("Estado         :", guia.estado)
 
     # Salir
 
-    elif opcion == "3":
+    elif opcion == "4":
 
         print("\nGracias por usar el sistema.")
         break
