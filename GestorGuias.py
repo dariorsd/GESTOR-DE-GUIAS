@@ -70,7 +70,8 @@ while True:
     print("1. Registrar guía")
     print("2. Cambiar estado")
     print("3. Mostrar guías")
-    print("4. Salir")
+    print("4. Exportar guías")
+    print("5. Salir")
 
     opcion = input("Seleccione una opción: ")
 
@@ -109,14 +110,16 @@ while True:
 
         for guia in lista_datos_envio:
             print(f"Guía N° {guia.numero_guia} - Estado: {guia.estado}")
-            numero = int(input("\nSeleccione el número de guía: "))
+        numero = int(input("\nSeleccione el número de guía: "))
 
-            print("\n===== CAMBIAR ESTADO =====")
+        print("\n===== CAMBIAR ESTADO =====")
 
         print("1. En almacén")
         print("2. En camino")
         print("3. Entregada")
         print("4. Cancelar")
+
+            
 
         opcion_estado = input("Seleccione una opción: ")
 
@@ -161,9 +164,31 @@ while True:
                 print("Transportista  :", guia.transportista)
                 print("Estado         :", guia.estado)
 
+    elif opcion == "4":
+
+        archivo = open("guias.txt", "w", encoding="utf-8")
+
+        archivo.write("===== REPORTE DE GUÍAS =====\n\n")
+
+        for guia in lista_datos_envio:
+
+            archivo.write("----------------------------------------\n")
+            archivo.write(f"Usuario        : {guia.usuario}\n")
+            archivo.write(f"Número de guía : {guia.numero_guia}\n")
+            archivo.write(f"Empresa        : {guia.empresa}\n")
+            archivo.write(f"RUC            : {guia.ruc}\n")
+            archivo.write(f"Distrito       : {guia.distrito}\n")
+            archivo.write(f"Transportista  : {guia.transportista}\n")
+            archivo.write(f"Estado         : {guia.estado}\n")
+
+        archivo.close()
+
+        print("\nReporte exportado correctamente.")
+        print("Se creó el archivo 'guias.txt'.")
+
     # Salir
 
-    elif opcion == "4":
+    elif opcion == "5":
 
         print("\nGracias por usar el sistema.")
         break
